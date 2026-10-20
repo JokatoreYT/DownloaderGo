@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: goapi
-    runtime: docker
-    plan: free
-    dockerfilePath: ./Dockerfile
