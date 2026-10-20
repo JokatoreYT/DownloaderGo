@@ -1,0 +1,32 @@
+server {
+    listen       ${PORT};
+    listen  [::]:${PORT};
+    server_name  _;
+
+    # Pagina di default originale di nginx (/usr/share/nginx/html/index.html)
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+
+    # Backend GoAPI (Node, solo su localhost)
+    location ~ ^/(api|downs)/ {
+        proxy_pass         http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+
+        # download in streaming: niente buffer su disco/RAM di nginx
+        proxy_buffering         off;
+        proxy_request_buffering off;
+        proxy_read_timeout      3600s;
+        proxy_send_timeout      3600s;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
