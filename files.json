@@ -1,0 +1,12 @@
+{
+  "files": [
+    {
+      "name": "esempio.zip",
+      "drive": "https://drive.google.com/file/d/INCOLLA_QUI_ID_DEL_FILE/view?usp=sharing"
+    },
+    {
+      "name": "altro-archivio.7z",
+      "drive": "https://drive.google.com/file/d/INCOLLA_QUI_ID_DEL_FILE/view?usp=sharing"
+    }
+  ]
+}
